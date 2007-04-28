@@ -1,8 +1,8 @@
 %define name vdrift
 %define version 0.1
-%define fulldate 2006-10-06
+%define fulldate 2007-03-23
 %define date %(echo %{fulldate} | sed -e 's/-//g')
-%define release %mkrel 2.%{date}
+%define release %mkrel 0.%{date}.1
 %define distname %{name}-%{fulldate}-src
 
 Summary: Driving simulation
@@ -10,13 +10,12 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
-Patch0: vdrift-2006-10-06-noinstall.patch
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: scons
-BuildRequires: SDL-devel SDL_image-devel SDL_net-devel
+BuildRequires: SDL-devel SDL_image-devel SDL_net-devel libSDL_gfx0-devel
 BuildRequires: mesaglu-devel
 BuildRequires: freealut-devel, openal-devel
 Requires: %{name}-data
@@ -27,7 +26,6 @@ drift racing in mind.
 
 %prep
 %setup -q -n %{distname}
-%patch0 -p1 -b .noinstall
 echo > data/SConscript
 
 %build
@@ -61,5 +59,3 @@ rm -rf %{buildroot}
 %dir %{_gamesdatadir}/%{name}
 %dir %{_gamesdatadir}/%{name}/data
 %{_datadir}/applications/mandriva-%{name}.desktop
-
-
