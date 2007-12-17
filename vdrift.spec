@@ -13,7 +13,6 @@ Source0: %{distname}.tar.bz2
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: scons
 BuildRequires: SDL-devel SDL_image-devel SDL_net-devel libSDL_gfx-devel
 BuildRequires: mesaglu-devel
