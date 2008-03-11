@@ -1,6 +1,6 @@
 %define name vdrift
 %define version 0.2
-%define fulldate 2007-03-23
+%define fulldate 2007-12-26
 %define date %(echo %{fulldate} | sed -e 's/-//g')
 %define release %mkrel 0.%{date}.1
 %define distname %{name}-%{fulldate}-src
@@ -17,7 +17,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: scons
 BuildRequires: SDL-devel SDL_image-devel SDL_net-devel libSDL_gfx-devel
 BuildRequires: mesaglu-devel
-BuildRequires: freealut-devel, openal-devel
+BuildRequires: freealut-devel, openal-devel, libvorbis-devel, bullet-devel
 Requires: %{name}-data
 
 %description
@@ -25,8 +25,8 @@ VDrift is a cross-platform, open source driving simulation made with
 drift racing in mind.
 
 %prep
-%setup -q -n %{distname}
-echo > data/SConscript
+%setup -q -n %{name}
+#echo > data/SConscript
 
 %build
 scons NLS=0 use_binreloc=0
