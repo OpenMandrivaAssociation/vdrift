@@ -10,6 +10,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
+Patch0: sconstruct_patch
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
