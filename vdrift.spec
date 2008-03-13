@@ -44,7 +44,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 Name=VDrift
 Comment=Driving simulation
 Exec=soundwrapper %_gamesbindir/%{name}
-Icon=%{_gamesdatadir}/%{name}/data/textures/large/icons/%{name}-64x64.png
+Icon=%{_gamesdatadir}/%{name}/data/textures/icons/%{name}-64x64.png
 Terminal=false
 Type=Application
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
