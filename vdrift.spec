@@ -11,7 +11,7 @@ Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
 Patch0: sconstruct_patch
-Patch1:	graphic.cpp.patch
+Patch1:	graphics.cpp.patch
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
