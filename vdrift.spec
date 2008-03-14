@@ -2,7 +2,7 @@
 %define version 0.2
 %define fulldate 2007-12-26
 %define date %(echo %{fulldate} | sed -e 's/-//g')
-%define release %mkrel 0.%{date}.3
+%define release %mkrel 0.%{date}.4
 %define distname %{name}-%{fulldate}-src
 
 Summary: Driving simulation
@@ -11,6 +11,7 @@ Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
 Patch0: sconstruct_patch
+Patch1:	graphic.cpp.patch
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
@@ -28,6 +29,7 @@ drift racing in mind.
 %prep
 %setup -q -n %{name}
 %patch0 -p0
+%patch1 -p0
 
 %build
 ln -sf %{_includedir}/bullet .
