@@ -1,6 +1,6 @@
 %define name vdrift
 %define version 0.2
-%define fulldate 2008-02-23-RC1
+%define fulldate 2008-02-23
 %define date %(echo %{fulldate} | sed -e 's/-//g')
 %define release %mkrel 0.%{date}.4
 %define distname %{name}-%{fulldate}-RC1
@@ -10,7 +10,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
-Patch0: sconstruct_patch
+Patch0: vdrift_sconstruct.patch
 License: GPL
 Group: Games/Arcade
 Url: http://vdrift.net/
