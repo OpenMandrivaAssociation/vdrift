@@ -28,7 +28,6 @@ drift racing in mind.
 %prep
 %setup -q -n %{distname}
 %patch0 -p0
-%patch0 -p0
 
 %build
 ln -sf %{_includedir}/bullet .
