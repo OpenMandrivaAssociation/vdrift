@@ -1,9 +1,9 @@
 %define name vdrift
-%define version 0.2
-%define fulldate 2008-02-23
+%define version 0.3
+%define fulldate 2009-06-15
 %define date %(echo %{fulldate} | sed -e 's/-//g')
 %define release %mkrel 0.%{date}.4
-%define distname %{name}-%{fulldate}-RC1
+%define distname %{name}-%{fulldate}-src
 
 Summary: Driving simulation
 Name: %{name}
@@ -26,11 +26,10 @@ VDrift is a cross-platform, open source driving simulation made with
 drift racing in mind.
 
 %prep
-%setup -q -n %{distname}
-%patch0 -p0
+%setup -q -n %{name}-%{fulldate}
+# %patch0 -p0
 
 %build
-ln -sf %{_includedir}/bullet .
 scons NLS=0 use_binreloc=0
 
 %install
