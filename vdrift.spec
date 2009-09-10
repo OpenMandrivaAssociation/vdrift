@@ -2,7 +2,7 @@
 %define version 0.3
 %define fulldate 2009-06-15
 %define date %(echo %{fulldate} | sed -e 's/-//g')
-%define release %mkrel 0.%{date}.4
+%define release %mkrel 0.%{date}.5
 %define distname %{name}-%{fulldate}-src
 
 Summary: Driving simulation
