@@ -2,8 +2,8 @@
 %define version 0.3
 %define fulldate 2009-06-15
 %define date %(echo %{fulldate} | sed -e 's/-//g')
-%define release %mkrel 0.%{date}.5
-%define distname %{name}-%{fulldate}-src
+%define release %mkrel 0.%{date}.2
+%define distname %{name}-%{fulldate}
 
 Summary: Driving simulation
 Name: %{name}
@@ -11,7 +11,7 @@ Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
 Patch0: vdrift_sconstruct.patch
-License: GPL
+License: GPLv3
 Group: Games/Arcade
 Url: http://vdrift.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -19,6 +19,8 @@ BuildRequires: scons
 BuildRequires: SDL-devel SDL_image-devel SDL_net-devel libSDL_gfx-devel
 BuildRequires: mesaglu-devel
 BuildRequires: freealut-devel, openal-devel, libvorbis-devel, bullet-devel, glew-devel
+BuildRequires: libboost-devel
+BuildRequires: asio
 Requires: %{name}-data
 
 %description
@@ -26,11 +28,12 @@ VDrift is a cross-platform, open source driving simulation made with
 drift racing in mind.
 
 %prep
-%setup -q -n %{name}-%{fulldate}
-# %patch0 -p0
+%setup -q -n %{distname}
+#%patch0 -p0
 
 %build
-scons NLS=0 use_binreloc=0
+#ln -sf %{_includedir}/bullet .
+scons NLS=0 use_binreloc=0 prefix=/usr
 
 %install
 rm -rf %{buildroot}
@@ -59,3 +62,4 @@ rm -rf %{buildroot}
 %dir %{_gamesdatadir}/%{name}
 %dir %{_gamesdatadir}/%{name}/data
 %{_datadir}/applications/mandriva-%{name}.desktop
+
