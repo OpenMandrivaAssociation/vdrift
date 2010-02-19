@@ -5,12 +5,11 @@
 %define release %mkrel 0.%{date}.2
 %define distname %{name}-%{fulldate}
 
-Summary: Driving simulation
+Summary: Open Source Car Racing Simulator
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
-Patch0: vdrift_sconstruct.patch
 License: GPLv3
 Group: Games/Arcade
 Url: http://vdrift.net/
@@ -29,11 +28,10 @@ drift racing in mind.
 
 %prep
 %setup -q -n %{distname}
-#%patch0 -p0
+
 
 %build
-#ln -sf %{_includedir}/bullet .
-scons NLS=0 use_binreloc=0 prefix=/usr
+scons NLS=0 use_binreloc=0 prefix=%{_prefix}
 
 %install
 rm -rf %{buildroot}
