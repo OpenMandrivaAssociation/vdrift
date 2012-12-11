@@ -1,10 +1,10 @@
 %define name vdrift
 %define version 0.4
-%define fulldate 2010-06-30
+%define fulldate 2012-07-22
 %define date %(echo %{fulldate} | sed -e 's/-//g')
 %define release %mkrel 0.%{date}.1
 %define distname %{name}-%{fulldate}
-
+%define oname VDrift
 %define dataname %{name}-data
 
 Summary: Open Source Car Racing Simulator
@@ -12,15 +12,26 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.bz2
+#upstream  SDL2 compatibility patch
+Patch0:	vdrift-2012-07-22c_patch.diff
 License: GPLv3
 Group: Games/Arcade
 Url: http://vdrift.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires: doxygen
 BuildRequires: scons
-BuildRequires: SDL-devel SDL_image-devel SDL_net-devel libSDL_gfx-devel
-BuildRequires: mesaglu-devel
-BuildRequires: freealut-devel, openal-devel, libvorbis-devel, bullet-devel, glew-devel
+BuildRequires: pkgconfig(libarchive)
+BuildRequires: pkgconfig(sdl) 
+BuildRequires: pkgconfig(SDL_image) 
+BuildRequires: pkgconfig(SDL_net)
+BuildRequires: pkgconfig(SDL_gfx)
+BuildRequires: pkgconfig(glu)
+BuildRequires: pkgconfig(freealut) 
+BuildRequires: pkgconfig(openal) 
+BuildRequires: pkgconfig(vorbis)
+BuildRequires: pkgconfig(bullet) 
+BuildRequires: pkgconfig(glew)
 BuildRequires: libboost-devel
+BuildRequires: pkgconfig(libcurl)
 BuildRequires: asio
 BuildRequires: mongodb-devel
 Obsoletes: %{name} < 0.4
@@ -30,27 +41,32 @@ Requires:  %{dataname}
 VDrift is a cross-platform, open source driving simulation made with
 drift racing in mind.
 
+#-------------
 %package -n %{dataname}
 Summary:    Data files for the VDrift driving simulation
 Requires:   %{name}  
 Group: Games/Arcade
 Obsoletes: %{dataname} < 0.4
 BuildArch:  noarch
+
 %description -n %{dataname}
 VDrift is a cross-platform, open source driving simulation made with
 drift racing in mind.
 This package contains data files for VDrift.
 
 
-%prep
-%setup -q -n %{distname}
 
+%prep
+%setup -q -n %{oname}
+%patch0 -p0
+
+chmod 644 LICENSE README.md
 
 %build
-scons NLS=0 use_binreloc=0 prefix=%{_prefix}
+LDFLAGS="%{ldflags} -lGL"
+scons NLS=0 use_binreloc=0 prefix=%{_prefix} 
 
 %install
-rm -rf %{buildroot}
 install -D -m755 build/%{name} %{buildroot}%{_gamesbindir}/%{name}
 install -d %{buildroot}%{_gamesdatadir}/%{name}/data
 cp -a data %{buildroot}%{_gamesdatadir}/%{name}
@@ -67,17 +83,15 @@ Type=Application
 Categories=Game;ArcadeGame;X-MandrivaLinux-MoreApplications-Games-Arcade;
 EOF
 
-%clean
-rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
-%doc docs/AUTHORS docs/ChangeLog docs/NEWS docs/README docs/TODO docs/VAMOS.txt
+%doc LICENSE README.md
 %{_gamesbindir}/%{name}
 %{_datadir}/applications/mandriva-%{name}.desktop
 
 %files -n %{dataname}
-%defattr(-,root,root)
+%doc LICENSE README.md
 %dir %{_gamesdatadir}/%{name}
 %dir %{_gamesdatadir}/%{name}/data
 %{_gamesdatadir}/%{name}/data/*
+
