@@ -16,7 +16,7 @@ Source0: %{distname}.tar.bz2
 Patch0:	vdrift-2012-07-22c_patch.diff
 License: GPLv3
 Group: Games/Arcade
-Url: http://vdrift.net/
+Url: https://vdrift.net/
 BuildRequires: doxygen
 BuildRequires: scons
 BuildRequires: pkgconfig(libarchive)
